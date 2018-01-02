@@ -1,0 +1,95 @@
+html, body {
+  height: 100%;
+}
+
+::-moz-selection { 
+  background: #2398EA;
+  color: white;
+}
+
+::selection { 
+  background: #2398EA;
+  color: white;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+body {
+  position: relative;
+}
+
+.card {
+  border-radius: 0.3em;
+  padding: 0 20vmin;
+}
+
+.made-by {
+  font-family: 'VT323', monospace;
+  font-size: 1.5em;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  padding: 1em;
+  background: white;
+}
+
+h1.home{
+  font-family: 'VT323', monospace;
+}
+
+.navbar-brand {
+  font-family: 'VT323', monospace;
+  font-size: 1.5em;
+}
+
+.navbar-brand a {
+  color: #2398EA;
+}
+
+form {
+  display: inline-flex;
+  width: 100%;
+}
+
+.another {
+  text-align: center;
+  padding-top: 0;
+  margin-top: 0;
+  padding-bottom: 0.5em;
+  color: #2398EA;
+}
+.container.api {
+  padding-bottom: 1em;
+}
+
+.container.api h3, h4 {
+  margin-top: 1em;
+}
+
+span.blue {
+  color: #2B9EEB;
+}
+
+button.navbar-burger {
+  border: none;
+}
+
+button:focus {
+  border: none;
+}
+
+@media only screen and (max-width: 750px) {
+  .card {
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  body {
+    margin-top: 0em;
+  }
+}
