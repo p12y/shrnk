@@ -28,7 +28,7 @@
         <a href="/api" class="navbar-item">
           Docs
         </a>
-        <a href="#" class="navbar-item">
+        <a href="https://github.com/p12y/shrnk" class="navbar-item">
           <i class="fa fa-code-fork" aria-hidden="true"></i>
         </a>
       </div>
@@ -60,6 +60,11 @@
       
       <pre>curl https://shrnk.glitch.me/shorten/[URL] </pre>
       
+      <br>
+      <p>
+        The server will respond with a JSON object containing the original and shortened URL.
+      </p>
+      
       <h4 class="title is-4">
         Redirect
       </h4>
@@ -69,6 +74,10 @@
       </h3>
       
       <pre>curl https://shrnk.glitch.me/[encoded_URL] </pre>
+      <br>
+      <p>
+        The server will respond with a redirect to the original URL.
+      </p>
       <h3 class="title is-3">
         <span class="blue">#</span> API
       </h3>
@@ -76,6 +85,10 @@
         1. Make a POST request
       </h3>
       <pre>curl -d "url=http://www.google.com" https://shrnk.glitch.me/api/shorten </pre>
+      <br>
+      <p>
+        The server will respond with a JSON object containing the original and shortened URL.
+      </p>
     </div>
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
