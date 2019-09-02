@@ -1,50 +1,51 @@
-var base58 = require('base58');
-var Url = require('../models/url');
-var validUrl = require('valid-url');
-var config = require('../config');
+const base58 = require('base58');
+const Url = require('../models/url');
+const validUrl = require('valid-url');
+const config = require('../config');
 
-var shrnk = {
-  
-  decodeUrl: function (req, res) {
-    var encoded_url = req.params.encoded_url;
-    var id = base58.decode(encoded_url);
+const shrnk = {
+  decodeUrl: (req, res) => {
+    const encodedUrl = req.params.encodedUrl;
+    const id = base58.decode(encodedUrl);
 
-    Url.findById(id, function(err, doc) {
+    Url.findOne({ id }, (err, doc) => {
       if (err) console.error(err);
 
       if (doc) {
-        res.redirect(doc.long_url);
+        res.redirect(doc.longUrl);
       } else {
         res.redirect('/');
       }
     });
   },
-  
-  encodeUrl: function (req, res) {
-    var url = req.body.url || req.url.slice(8);
+  encodeUrl: (req, res) => {
+    const url = req.body.url || req.url.slice(8);
 
-    if (!validUrl.isUri(url)){
-      res.send(400);
-      return;
+    if (!validUrl.isUri(url)) {
+      return res.send(400);
     }
 
-    var query = Url.where({ long_url: url });
-
-    query.findOne(function(err, doc) {
+    const query = Url.findOne({ longUrl: url }, (findErr, doc) => {
+      if (findErr) return console.error(findErr);
       if (doc) {
-        res.json({ short_url: config.webroot + base58.encode(doc.id), original_url: url });
+        res.json({
+          short_url: `${config.webroot}${base58.encode(doc.id)}`,
+          originalUrl: url,
+        });
       } else {
-        var newUrl = new Url({ long_url: url });
+        const newUrl = new Url({ longUrl: url });
 
-        newUrl.save(function(err, newDoc) {
-          if (err) console.error(err);
+        newUrl.save((saveErr, newDoc) => {
+          if (saveErr) console.error(saveErr);
 
-          res.json({ short_url: config.webroot + base58.encode(newDoc.id), original_url: url });
+          res.json({
+            short_url: `${config.webroot}${base58.encode(newDoc.id)}`,
+            originalUrl: url,
+          });
         });
       }
     });
-  }
+  },
 };
-
 
 module.exports = shrnk;

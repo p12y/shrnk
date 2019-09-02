@@ -1,39 +1,42 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var config = require('../config');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const config = require('../config');
 
-mongoose.connect('mongodb://' + config.db.user + ':' + config.db.password + config.db.url);
-var db = mongoose.connection;
+mongoose.connect(
+  `mongodb+srv://${config.db.user}:${config.db.password}${config.db.url}`,
+  { useNewUrlParser: true }
+);
 
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-var counterSchema = new Schema({
-  _id: { type: String, index: true },
-  count: { type: Number, default: 0 }
+const counterSchema = new Schema({
+  id: { type: String, index: true },
+  count: { type: Number, default: 0 },
 });
 
-var Counter = mongoose.model('Counter', counterSchema);
+const Counter = mongoose.model('Counter', counterSchema);
 
-var urlSchema = new Schema({
-  _id: { type: Number, index: true },
-  long_url: String,
-  created_at: Date
+const urlSchema = new Schema({
+  id: { type: Number, index: true },
+  longUrl: String,
+  created_at: Date,
 });
 
 urlSchema.pre('save', function(next) {
-  var self = this;
+  const url = this;
   Counter.findOneAndUpdate(
-    { _id: 'url_count' }, 
-    { $inc: { count: 1 } }, 
-    function(err, counter) {
+    { id: 'urlCount' },
+    { $inc: { count: 1 } },
+    (err, counter) => {
       if (err) return next(err);
 
-      self._id = counter.count;
-      self.created_at = new Date();
+      url.id = counter.count;
+      url.created_at = new Date();
       next();
-  });
+    }
+  );
 });
 
-var Url = mongoose.model('Url', urlSchema);
-
+const Url = mongoose.model('Url', urlSchema);
 module.exports = Url;

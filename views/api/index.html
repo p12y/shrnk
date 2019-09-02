@@ -2,18 +2,36 @@
 <html class="has-navbar-fixed-top">
   <head>
     <title>Shrnk - URL Shortener</title>
-    <meta name="description" content="A cool thing made with Glitch">
-    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <meta name="description" content="A cool thing made with Glitch" />
+    <link
+      id="favicon"
+      rel="icon"
+      href="https://glitch.com/edit/favicon-app.ico"
+      type="image/x-icon"
+    />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=VT323"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <nav
+      class="navbar is-fixed-top"
+      role="navigation"
+      aria-label="main navigation"
+    >
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
           Shr:nk
@@ -46,54 +64,55 @@
       </div>
     </section>
     <div class="container api">
-      <h3 class="title is-3">
-        <span class="blue">#</span> Microservice
-      </h3>
-      
+      <h3 class="title is-3"><span class="blue">#</span> Microservice</h3>
+
       <h4 class="title is-4">
         Shorten
       </h4>
-      
+
       <h3 class="title is-6">
         1. Make a GET request
       </h3>
-      
+
       <pre>curl https://shrnk.glitch.me/shrink/[URL] </pre>
-      
-      <br>
+
+      <br />
       <p>
-        The server will respond with a JSON object containing the original and shortened URL.
+        The server will respond with a JSON object containing the original and
+        shortened URL.
       </p>
-      
+
       <h4 class="title is-4">
         Redirect
       </h4>
-      
+
       <h3 class="title is-6">
         1. Make a GET request
       </h3>
-      
-      <pre>curl https://shrnk.glitch.me/[encoded_URL] </pre>
-      <br>
+
+      <pre>curl https://shrnk.glitch.me/[encodedUrl] </pre>
+      <br />
       <p>
         The server will respond with a redirect to the original URL.
       </p>
-      <h3 class="title is-3">
-        <span class="blue">#</span> API
-      </h3>
+      <h3 class="title is-3"><span class="blue">#</span> API</h3>
       <h3 class="title is-6">
         1. Make a POST request
       </h3>
-      <pre>curl -d "url=http://www.google.com" https://shrnk.glitch.me/api/shrink </pre>
-      <br>
+      <pre>
+curl -d "url=http://www.google.com" https://shrnk.glitch.me/api/shrink </pre
+      >
+      <br />
       <p>
-        The server will respond with a JSON object containing the original and shortened URL.
+        The server will respond with a JSON object containing the original and
+        shortened URL.
       </p>
     </div>
-    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
-            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
-            crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-2.2.1.min.js"
+      integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+      crossorigin="anonymous"
+    ></script>
     <script src="/client.js"></script>
   </body>
 </html>
-
