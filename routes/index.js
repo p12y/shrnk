@@ -1,8 +1,8 @@
-const config = require('../config');
 const bodyParser = require('body-parser');
-const shrnk = require('../api');
+const config = require('../config');
+const api = require('../api');
 
-function declareRoutes(app) {
+const declareRoutes = app => {
   app.use(bodyParser.urlencoded({ extended: false }));
 
   app.use(bodyParser.json());
@@ -16,16 +16,12 @@ function declareRoutes(app) {
   });
 
   app.post('/api/shrink', (req, res) => {
-    shrnk.encodeUrl(req, res);
-  });
-
-  app.get('/shrink/*', (req, res) => {
-    shrnk.encodeUrl(req, res);
+    api.encodeUrl(req, res);
   });
 
   app.get('/:encodedUrl', (req, res) => {
-    shrnk.decodeUrl(req, res);
+    api.decodeUrl(req, res);
   });
-}
+};
 
 module.exports = declareRoutes;

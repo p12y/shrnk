@@ -1,5 +1,5 @@
-const config = {
-  webroot: 'https://shrnk.glitch.me/',
+module.exports = {
+  webroot: 'localhost:8080/',
   dirname: __dirname,
   db: {
     user: 'default',
@@ -7,5 +7,3 @@ const config = {
     url: process.env.DB_URL,
   },
 };
-
-module.exports = config;

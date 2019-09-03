@@ -36,7 +36,7 @@ function handleSuccess(d) {
   toggleButtons();
   $('.help').text('');
   $('input')
-    .val(d.short_url)
+    .val(d.shortUrl)
     .select();
 }
 
