@@ -2,82 +2,93 @@
 <html>
   <head>
     <title>Shrnk - URL Shortener</title>
-    <meta name="description" content="A cool thing made with Glitch">
-    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <meta name="description" content="URL Shortener" />
+    <link
+      id="favicon"
+      rel="icon"
+      href="https://glitch.com/edit/favicon-app.ico"
+      type="image/x-icon"
+    />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=VT323"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
-    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          Shr:nk
-        </a>
-        <button class="button navbar-burger" id="burger" data-target="navMenu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-      <div class="navbar-menu" id="navMenu">
-        <a href="/api" class="navbar-item">
-          Docs
-        </a>
-        <a href="https://github.com/p12y/shrnk" class="navbar-item">
-          <i class="fa fa-code-fork" aria-hidden="true"></i>
-        </a>
-      </div>
-    </nav>
-    <section class="hero is-success is-fullheight">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <h1 class="title home is-1">
-            Shr:nk
-          </h1>
-          <h2 class="subtitle">
-            URL Shortener
-          </h2>
-          <div class="card">
-            <div class="card-content">
-              <div class="field has-addons has-addons-centered">
-                <form>
-                  <div class="control is-expanded">
-                    <input name="url" class="input is-medium" type="text" placeholder="Paste URL here">
-                    <p class="help is-danger"></p>
-                  </div>
-                  <div class="control">
-                    <button type="submit" class="submit button is-info is-medium">
-                      <span class="icon is-small">
-                        <i class="fa fa-magic"></i>
-                      </span>
-                      <span>Shrink</span>
-                    </button>
-                    <a class="copy button is-success is-medium">
-                      <span class="icon is-small">
-                        <i class="fa fa-clipboard"></i>
-                      </span>
-                      <span>Copy</span>
-                    </a>
-                  </div>
-                </form>
+    <div id="app">
+      <navbar></navbar>
+      <section class="hero is-success is-fullheight">
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <h1 class="title home is-1">
+              Shr:nk
+            </h1>
+            <h2 class="subtitle">
+              URL Shortener
+            </h2>
+            <div class="card">
+              <div class="card-content">
+                <div class="field has-addons has-addons-centered">
+                  <form v-on:submit="handleSubmit">
+                    <div class="control is-expanded">
+                      <input
+                        ref="input"
+                        :class="inputClass"
+                        v-model="url"
+                        v-on:input="reset(false)"
+                        name="url"
+                        class="input is-medium"
+                        type="text"
+                        placeholder="Paste URL here"
+                      />
+                      <p class="help is-danger">{{ errorMessage }}</p>
+                    </div>
+                    <div class="control">
+                      <button
+                        v-if="!isSuccess"
+                        type="submit"
+                        class="submit button is-info is-medium"
+                      >
+                        <span class="icon is-small">
+                          <i class="fa fa-magic"></i>
+                        </span>
+                        <span>Shrink</span>
+                      </button>
+                      <a
+                        v-if="isSuccess"
+                        v-on:click="copyUrl"
+                        class="copy button is-success is-medium"
+                      >
+                        <span class="icon is-small">
+                          <i class="fa fa-clipboard"></i>
+                        </span>
+                        <span>{{ copyText }}</span>
+                      </a>
+                    </div>
+                  </form>
+                </div>
               </div>
-            </div>
-            <div class="another">
-              <a>Another?</a>
+              <div v-if="isSuccess" class="another" v-on:click="reset(true)">
+                <a>Another?</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
-            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
-            crossorigin="anonymous"></script>
+      </section>
+    </div>
     <script src="/client.js"></script>
   </body>
 </html>
-

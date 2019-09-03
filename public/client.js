@@ -1,87 +1,105 @@
-$(document).ready(function() {
-  $('.copy').hide();
-  $('.another').hide();
-
-  $('form').submit(function(e) {
-    e.preventDefault();
-
-    var longUrl = $('input').val();
-    var data = { url: longUrl };
-
-    $.ajax({
-      type: 'POST',
-      url: '/api/shrink',
-      data: data,
-      success: handleSuccess,
-      error: handleError,
-      dataType: 'json',
-    });
-  });
-
-  $('.copy').click(function() {
-    copyUrl();
-  });
-
-  $('.another a').click(function() {
-    reset();
-  });
-
-  $('input').on('change keyup paste', function() {
-    $('.help').text('');
-    $('input').removeClass('is-danger');
-  });
+Vue.component('navbar', {
+  data: function() {
+    return {
+      isMenuActive: false,
+    };
+  },
+  methods: {
+    toggleMenu: function() {
+      this.isMenuActive = !this.isMenuActive;
+    },
+  },
+  template: `
+    <nav
+      class="navbar is-fixed-top"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          Shr:nk
+        </a>
+        <button
+          v-on:click="toggleMenu"
+          :class="['button navbar-burger', { 'is-active': isMenuActive }]"
+          id="burger"
+          data-target="navMenu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div
+        :class="['navbar-menu', { 'is-active': isMenuActive }]"
+        id="navMenu"
+      >
+        <a href="/api" class="navbar-item">
+          Docs
+        </a>
+        <a href="https://github.com/p12y/shrnk" class="navbar-item">
+          <i class="fa fa-code-fork" aria-hidden="true"></i>
+        </a>
+      </div>
+    </nav>
+  `,
 });
 
-function handleSuccess(d) {
-  toggleButtons();
-  $('.help').text('');
-  $('input')
-    .val(d.shortUrl)
-    .select();
-}
+var DEFAULT_COPY_TEXT = 'Copy';
 
-function copyUrl() {
-  $('input').select();
-  document.execCommand('copy');
-  $('.copy').html(
-    '<span class="icon is-small"><i class="fa fa-clone"></i></span><span>Copied!</span>'
-  );
-}
-
-function reset() {
-  $('input').val('');
-  $('.copy').html(
-    '<span class="icon is-small"><i class="fa fa-clipboard"></i></span><span>Copy</span>'
-  );
-  toggleButtons();
-}
-
-function handleError() {
-  $('.help').text('Invalid URL');
-  $('input').toggleClass('is-danger');
-}
-
-function toggleButtons() {
-  $('.copy').toggle();
-  $('.submit').toggle();
-  $('.another').toggle();
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  var $navbarBurgers = Array.prototype.slice.call(
-    document.querySelectorAll('.navbar-burger'),
-    0
-  );
-
-  if ($navbarBurgers.length > 0) {
-    $navbarBurgers.forEach(function($el) {
-      $el.addEventListener('click', function() {
-        var target = $el.dataset.target;
-        var $target = document.getElementById(target);
-
-        $el.classList.toggle('is-active');
-        $target.classList.toggle('is-active');
-      });
-    });
-  }
+var app = new Vue({
+  el: '#app',
+  data: {
+    url: '',
+    isSuccess: false,
+    copyText: DEFAULT_COPY_TEXT,
+    errorMessage: '',
+  },
+  computed: {
+    inputClass: function() {
+      return this.errorMessage ? 'is-danger' : '';
+    },
+  },
+  methods: {
+    handleSubmit: function(e) {
+      e.preventDefault();
+      var data = { url: this.url };
+      return fetch('/api/shrink', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .catch(function(error) {
+          app.errorMessage = 'Something went wrong, try again';
+          console.error(error);
+        })
+        .then(function(response) {
+          if (response.status === 400) {
+            app.errorMessage = 'Invalid URL';
+            throw Error(response.statusText);
+          }
+          return response.json();
+        })
+        .then(function(data) {
+          app.url = data.shortUrl;
+          app.isSuccess = true;
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+    },
+    reset: function(clear) {
+      if (clear) this.url = '';
+      this.errorMessage = '';
+      this.isSuccess = false;
+      this.copyText = DEFAULT_COPY_TEXT;
+    },
+    copyUrl: function() {
+      this.$refs.input.select();
+      document.execCommand('copy');
+      this.copyText = 'Copied!';
+    },
+  },
 });

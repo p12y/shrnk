@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
   <head>
     <title>Shrnk - URL Shortener</title>
-    <meta name="description" content="A cool thing made with Glitch" />
+    <meta name="description" content="URL Shortener" />
     <link
       id="favicon"
       rel="icon"
@@ -25,94 +25,69 @@
       href="https://fonts.googleapis.com/css?family=VT323"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
-    <nav
-      class="navbar is-fixed-top"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          Shr:nk
-        </a>
-        <button class="button navbar-burger" id="burger" data-target="navMenu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-      <div class="navbar-menu" id="navMenu">
-        <a href="/api" class="navbar-item">
-          Docs
-        </a>
-        <a href="https://github.com/p12y/shrnk" class="navbar-item">
-          <i class="fa fa-code-fork" aria-hidden="true"></i>
-        </a>
-      </div>
-    </nav>
-    <section class="hero api is-info">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title is-2">
-            Documentation
-          </h1>
-          <h2 class="subtitle">
-            How to use the Shrnk API & microservice
-          </h2>
+    <div id="app">
+      <navbar></navbar>
+      <section class="hero api is-info">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title is-2">
+              Documentation
+            </h1>
+            <h2 class="subtitle">
+              How to use the Shrnk API & microservice
+            </h2>
+          </div>
         </div>
-      </div>
-    </section>
-    <div class="container api">
-      <h3 class="title is-3"><span class="blue">#</span> Microservice</h3>
+      </section>
+      <div class="container api">
+        <h3 class="title is-3"><span class="blue">#</span> Microservice</h3>
 
-      <h4 class="title is-4">
-        Shorten
-      </h4>
+        <h4 class="title is-4">
+          Shorten
+        </h4>
 
-      <h3 class="title is-6">
-        1. Make a GET request
-      </h3>
+        <h3 class="title is-6">
+          1. Make a GET request
+        </h3>
 
-      <pre>curl https://shrnk.glitch.me/shrink/[URL] </pre>
+        <pre>curl https://shrnk.glitch.me/shrink/[URL] </pre>
 
-      <br />
-      <p>
-        The server will respond with a JSON object containing the original and
-        shortened URL.
-      </p>
+        <br />
+        <p>
+          The server will respond with a JSON object containing the original and
+          shortened URL.
+        </p>
 
-      <h4 class="title is-4">
-        Redirect
-      </h4>
+        <h4 class="title is-4">
+          Redirect
+        </h4>
 
-      <h3 class="title is-6">
-        1. Make a GET request
-      </h3>
+        <h3 class="title is-6">
+          1. Make a GET request
+        </h3>
 
-      <pre>curl https://shrnk.glitch.me/[encodedUrl] </pre>
-      <br />
-      <p>
-        The server will respond with a redirect to the original URL.
-      </p>
-      <h3 class="title is-3"><span class="blue">#</span> API</h3>
-      <h3 class="title is-6">
-        1. Make a POST request
-      </h3>
-      <pre>
+        <pre>curl https://shrnk.glitch.me/[encodedUrl] </pre>
+        <br />
+        <p>
+          The server will respond with a redirect to the original URL.
+        </p>
+        <h3 class="title is-3"><span class="blue">#</span> API</h3>
+        <h3 class="title is-6">
+          1. Make a POST request
+        </h3>
+        <pre>
 curl -d "url=http://www.google.com" https://shrnk.glitch.me/api/shrink </pre
-      >
-      <br />
-      <p>
-        The server will respond with a JSON object containing the original and
-        shortened URL.
-      </p>
+        >
+        <br />
+        <p>
+          The server will respond with a JSON object containing the original and
+          shortened URL.
+        </p>
+      </div>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-2.2.1.min.js"
-      integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
-      crossorigin="anonymous"
-    ></script>
     <script src="/client.js"></script>
   </body>
 </html>

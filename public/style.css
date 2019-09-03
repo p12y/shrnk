@@ -1,19 +1,20 @@
-html, body {
+html,
+body {
   height: 100%;
 }
 
-::-moz-selection { 
-  background: #2398EA;
+::-moz-selection {
+  background: #2398ea;
   color: white;
 }
 
-::selection { 
-  background: #2398EA;
+::selection {
+  background: #2398ea;
   color: white;
 }
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 body {
@@ -37,7 +38,7 @@ body {
   background: white;
 }
 
-h1.home{
+h1.home {
   font-family: 'VT323', monospace;
 }
 
@@ -47,7 +48,7 @@ h1.home{
 }
 
 .navbar-brand a {
-  color: #2398EA;
+  color: #2398ea;
 }
 
 form {
@@ -60,18 +61,19 @@ form {
   padding-top: 0;
   margin-top: 0;
   padding-bottom: 0.5em;
-  color: #2398EA;
+  color: #2398ea;
 }
 .container.api {
-  padding-bottom: 1em;
+  padding: 1rem;
 }
 
-.container.api h3, h4 {
+.container.api h3,
+h4 {
   margin-top: 1em;
 }
 
 span.blue {
-  color: #2B9EEB;
+  color: #2b9eeb;
 }
 
 button.navbar-burger {
