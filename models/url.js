@@ -7,7 +7,11 @@ const logConnectionError = err => console.error('Connection error', err);
 mongoose
   .connect(
     `mongodb+srv://${config.db.user}:${config.db.password}${config.db.url}`,
-    { useNewUrlParser: true }
+    {
+      useNewUrlParser: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+    }
   )
   .catch(logConnectionError);
 
