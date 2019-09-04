@@ -4,7 +4,8 @@
   "description": "URL Shortener",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon ./server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "dependencies": {
     "base58": "^2.0.1",
