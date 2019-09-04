@@ -27,15 +27,15 @@ body {
 }
 
 .made-by {
+  background: white;
+  bottom: 0;
   font-family: 'VT323', monospace;
   font-size: 1.5em;
-  position: absolute;
   left: 0;
-  right: 0;
-  bottom: 0;
-  text-align: center;
   padding: 1em;
-  background: white;
+  position: absolute;
+  right: 0;
+  text-align: center;
 }
 
 h1.home {
@@ -57,11 +57,11 @@ form {
 }
 
 .another {
-  text-align: center;
-  padding-top: 0;
+  color: #2398ea;
   margin-top: 0;
   padding-bottom: 0.5em;
-  color: #2398ea;
+  padding-top: 0;
+  text-align: center;
 }
 .container.api {
   padding: 1rem;

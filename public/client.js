@@ -55,11 +55,6 @@ var app = new Vue({
     copyText: DEFAULT_COPY_TEXT,
     errorMessage: '',
   },
-  computed: {
-    inputClass: function() {
-      return this.errorMessage ? 'is-danger' : '';
-    },
-  },
   methods: {
     handleSubmit: function(e) {
       e.preventDefault();

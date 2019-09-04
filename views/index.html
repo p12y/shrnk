@@ -46,11 +46,10 @@
                     <div class="control is-expanded">
                       <input
                         ref="input"
-                        :class="inputClass"
+                        :class="['input is-medium', {'is-danger': errorMessage}]"
                         v-model="url"
                         v-on:input="reset(false)"
                         name="url"
-                        class="input is-medium"
                         type="text"
                         placeholder="Paste URL here"
                       />
