@@ -26,7 +26,7 @@ const api = {
   encodeUrl: (req, res) => {
     const url = req.body.url || req.url.slice(8);
 
-    if (!validUrl.isUri(url)) return res.send(400);
+    if (!validUrl.isUri(url)) return res.sendStatus(400);
 
     Url.findOne({ longUrl: url }, (findErr, doc) => {
       if (findErr) return console.error(findErr);
