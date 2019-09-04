@@ -50,6 +50,7 @@
             Shr:nk
           </a>
           <button
+            v-cloak
             v-on:click="toggleMenu"
             :class="['button navbar-burger', { 'is-active': isMenuActive }]"
             id="burger"
@@ -61,6 +62,7 @@
           </button>
         </div>
         <div
+          v-cloak
           :class="['navbar-menu', { 'is-active': isMenuActive }]"
           id="navMenu"
         >
