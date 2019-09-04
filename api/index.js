@@ -1,7 +1,9 @@
 const Base58 = require('base58');
-const validUrl = require('valid-url');
+const urlRegex = require('url-regex');
 const Url = require('../models/url');
 const config = require('../config');
+
+const createShortUrl = url => `${config.webroot}/${Base58.int_to_base58(url)}`;
 
 const api = {
   /**
@@ -24,16 +26,21 @@ const api = {
    * If URL exists, just return the short URL
    */
   encodeUrl: (req, res) => {
-    const url = req.body.url || req.url.slice(8);
+    let url = req.body.url;
+    const httpRegex = /^http[s]*:\/{2}.+/;
 
-    if (!validUrl.isUri(url)) return res.sendStatus(400);
+    if (!httpRegex.test(url)) url = `http://${url}`;
+
+    const isValidUrl = urlRegex({ exact: true }).test(url);
+
+    if (!isValidUrl) return res.sendStatus(400);
 
     Url.findOne({ longUrl: url }, (findErr, doc) => {
       if (findErr) return console.error(findErr);
 
       if (doc) {
         res.json({
-          shortUrl: `${config.webroot}${Base58.int_to_base58(doc.id)}`,
+          shortUrl: createShortUrl(doc.id),
           originalUrl: url,
         });
       } else {
@@ -43,7 +50,7 @@ const api = {
           if (saveErr) console.error(saveErr);
 
           res.json({
-            shortUrl: `${config.webroot}${Base58.int_to_base58(newDoc.id)}`,
+            shortUrl: createShortUrl(newDoc.id),
             originalUrl: url,
           });
         });

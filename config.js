@@ -1,5 +1,5 @@
 module.exports = {
-  webroot: 'localhost:8080/',
+  webroot: 'localhost:8080',
   dirname: __dirname,
   db: {
     user: 'default',
