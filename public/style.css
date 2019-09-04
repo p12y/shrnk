@@ -95,3 +95,7 @@ button:focus {
     margin-top: 0em;
   }
 }
+
+[v-cloak] {
+  display: none;
+}

@@ -41,7 +41,7 @@
   <body>
     <div id="app">
       <navbar></navbar>
-      <section class="hero is-success is-fullheight">
+      <section class="hero is-success is-fullheight" v-cloak>
         <div class="hero-body">
           <div class="container has-text-centered">
             <h1 class="title home is-1">
@@ -53,18 +53,20 @@
             <div class="card">
               <div class="card-content">
                 <div class="field has-addons has-addons-centered">
-                  <form v-on:submit="handleSubmit">
+                  <form @submit="handleSubmit">
                     <div class="control is-expanded">
                       <input
                         ref="input"
                         :class="['input is-medium', {'is-danger': errorMessage}]"
                         v-model="url"
-                        v-on:input="reset(false)"
+                        @input="reset(false)"
                         name="url"
                         type="text"
                         placeholder="Paste URL here"
                       />
-                      <p class="help is-danger">{{ errorMessage }}</p>
+                      <p :class="['help', {'is-danger': errorMessage}]">
+                        {{ errorMessage }}
+                      </p>
                     </div>
                     <div class="control">
                       <button
@@ -79,7 +81,7 @@
                       </button>
                       <a
                         v-if="isSuccess"
-                        v-on:click="copyUrl"
+                        @click="copyUrl"
                         class="copy button is-success is-medium"
                       >
                         <span class="icon is-small">
@@ -91,7 +93,7 @@
                   </form>
                 </div>
               </div>
-              <div v-if="isSuccess" class="another" v-on:click="reset(true)">
+              <div v-if="isSuccess" class="another" @click="reset(true)">
                 <a>Another?</a>
               </div>
             </div>
