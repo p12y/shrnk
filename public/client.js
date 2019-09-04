@@ -17,13 +17,14 @@ var app = new Vue({
     items: [
       {
         title: 'Make a POST request',
-        command: 'curl -d url=LONG_URL https://shrnk.glitch.me/api/shrink',
+        command:
+          'curl -d url=LONG_URL https://shrnk-url.appspot.com/api/shrink',
         description:
           'The server will respond with a JSON object containing the original and shortened URL.',
       },
       {
         title: 'Make a GET request',
-        command: 'curl https://shrnk.glitch.me/ENCODED_URL',
+        command: 'curl https://shrnk-url.appspot.com/ENCODED_URL',
         description:
           'The server will respond with a redirect to the original URL.',
       },

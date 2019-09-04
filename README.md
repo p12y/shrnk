@@ -10,12 +10,12 @@ Shrnk is a URL shortener built with MongoDB, Express and Vue.
 
 - Copy a valid url
 - Paste URL into field and click shrink
-- Visit the shortened URL provided (Something like `https://shrnk.glitch.me/Sdf`)
+- Visit the shortened URL provided `localhost:8080/ENCODED_URL`
 
 ### API
 
 - Copy a valid url
-- Make a `POST` request to `https://shrnk.glitch.me/api/shrink` with data: `url=[copied-url]`
+- Make a `POST` request to `localhost:8080/api/shrink` with data: `url=LONG_URL`
 - The API returns a JSON object containing the shortened and original URLs
 
 # Installation

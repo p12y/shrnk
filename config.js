@@ -1,5 +1,5 @@
 module.exports = {
-  webroot: 'localhost:8080',
+  webroot: 'https://shrnk-url.appspot.com',
   dirname: __dirname,
   db: {
     user: 'default',
