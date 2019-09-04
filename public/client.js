@@ -1,48 +1,7 @@
-Vue.component('navbar', {
-  data: function() {
-    return {
-      isMenuActive: false,
-    };
-  },
-  methods: {
-    toggleMenu: function() {
-      this.isMenuActive = !this.isMenuActive;
-    },
-  },
-  template: `
-    <nav
-      class="navbar is-fixed-top"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          Shr:nk
-        </a>
-        <button
-          v-on:click="toggleMenu"
-          :class="['button navbar-burger', { 'is-active': isMenuActive }]"
-          id="burger"
-          data-target="navMenu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-      <div
-        :class="['navbar-menu', { 'is-active': isMenuActive }]"
-        id="navMenu"
-      >
-        <a href="/api" class="navbar-item">
-          Docs
-        </a>
-        <a href="https://github.com/p12y/shrnk" class="navbar-item">
-          <i class="fa fa-code-fork" aria-hidden="true"></i>
-        </a>
-      </div>
-    </nav>
-  `,
+Vue.component('request-doc-item', {
+  props: ['number', 'title', 'command', 'description'],
+  template:
+    '<div><h3 class="title is-6">{{number}}. {{title}}</h3><pre>{{command}}</pre><br /><p>{{description}}</p><br /></div>',
 });
 
 var DEFAULT_COPY_TEXT = 'Copy';
@@ -54,6 +13,21 @@ var app = new Vue({
     isSuccess: false,
     copyText: DEFAULT_COPY_TEXT,
     errorMessage: '',
+    isMenuActive: false,
+    items: [
+      {
+        title: 'Make a POST request',
+        command: 'curl -d url=LONG_URL https://shrnk.glitch.me/api/shrink',
+        description:
+          'The server will respond with a JSON object containing the original and shortened URL.',
+      },
+      {
+        title: 'Make a GET request',
+        command: 'curl https://shrnk.glitch.me/ENCODED_URL',
+        description:
+          'The server will respond with a redirect to the original URL.',
+      },
+    ],
   },
   methods: {
     handleSubmit: function(e) {
@@ -95,6 +69,9 @@ var app = new Vue({
       this.$refs.input.select();
       document.execCommand('copy');
       this.copyText = 'Copied!';
+    },
+    toggleMenu: function() {
+      this.isMenuActive = !this.isMenuActive;
     },
   },
 });

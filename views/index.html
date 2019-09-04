@@ -40,7 +40,38 @@
   </head>
   <body>
     <div id="app">
-      <navbar></navbar>
+      <nav
+        class="navbar is-fixed-top"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            Shr:nk
+          </a>
+          <button
+            v-on:click="toggleMenu"
+            :class="['button navbar-burger', { 'is-active': isMenuActive }]"
+            id="burger"
+            data-target="navMenu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <div
+          :class="['navbar-menu', { 'is-active': isMenuActive }]"
+          id="navMenu"
+        >
+          <a href="/api" class="navbar-item">
+            Docs
+          </a>
+          <a href="https://github.com/p12y/shrnk" class="navbar-item">
+            <i class="fa fa-code-fork" aria-hidden="true"></i>
+          </a>
+        </div>
+      </nav>
       <section class="hero is-success is-fullheight" v-cloak>
         <div class="hero-body">
           <div class="container has-text-centered">
