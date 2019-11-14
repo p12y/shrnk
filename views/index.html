@@ -103,12 +103,14 @@
                     </div>
                     <div class="control">
                       <button
+                        v-bind:disabled="isLoading"
                         v-if="!isSuccess"
                         type="submit"
                         class="submit button is-info is-medium"
                       >
                         <span class="icon is-small">
-                          <i class="fa fa-magic"></i>
+                          <i class="fa fa-magic" v-if="!isLoading"></i>
+                          <img v-else src="assets/loader.svg" />
                         </span>
                         <span>Shrink</span>
                       </button>
